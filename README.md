@@ -2,7 +2,7 @@
 <h1 align="center">Hi👋, I'm Aavash</h1>
 <h3 align="center">Student at Kathmandu University</h3> 
 
-- 🌱 I’m currently learning Flutter & MERN
+- 🌱 I’m currently learning Flutter, MERN & ML
 - 👯 I’m looking to collaborate on Python related Projects
 - 📫 How to reach me: aavashlamichhane@gmail.com
 
