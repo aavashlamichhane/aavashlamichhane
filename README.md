@@ -9,7 +9,7 @@
 
 - 🌱 I’m currently learning **machine learning.**
 
-- 💬 Ask me about **Express, TypeORM, PostgreSQL**
+- 💬 Ask me about **Express, PostgreSQL, NextJS**
 
 - 📫 How to reach me **aavashlamichhane@gmail.com**
 
