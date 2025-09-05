@@ -10,7 +10,7 @@
 # 📊 GitHub Stats:
 ![](https://readme-stats-github-theta.vercel.app/api?username=aavashlamichhane&theme=dark&hide_border=false&include_all_commits=true&count_private=false)<br/>
 ![](https://readme-stats-github-theta.vercel.app/?user=aavashlamichhane&theme=dark&hide_border=false)<br/>
-![](https://readme-stats-github-theta.vercel.app/api/top-langs/?username=aavashlamichhane&hide=jupyter%20notebook&theme=dark&hide_border=false&include_all_commits=true&count_private=false&layout=compact)
+![](https://readme-stats-github-theta.vercel.app/api/top-langs/?username=aavashlamichhane&hide=jupyter%20notebook,javascript&theme=dark&hide_border=false&include_all_commits=true&count_private=false&layout=compact)
 
 ## 🏆 GitHub Trophies
 ![](https://github-profile-trophy.vercel.app/?username=aavashlamichhane&theme=radical&no-frame=false&no-bg=true&margin-w=4)
