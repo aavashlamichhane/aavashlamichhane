@@ -139,10 +139,11 @@ export function retainAssetHistory(existing: string[], current: string[], previo
   const generated = /^(?:stats|languages|breakout|breakout-still)-(?:dark|light)(?:\.[a-f0-9]{12})?\.svg$/;
   for (const name of new Set([...existing, ...current])) {
     if (!generated.test(name)) continue;
-    const firstSeen = previous[name] ?? today;
-    const age = Date.parse(today) - Date.parse(firstSeen);
-    if (!current.includes(name) && age > 7 * 86_400_000) remove.push(name);
-    else history[name] = firstSeen;
+    if (current.includes(name)) continue;
+    const retiredOn = previous[name] ?? today;
+    const age = Date.parse(today) - Date.parse(retiredOn);
+    if (age > 7 * 86_400_000) remove.push(name);
+    else history[name] = retiredOn;
   }
   return { history: Object.fromEntries(Object.entries(history).sort()), remove };
 }

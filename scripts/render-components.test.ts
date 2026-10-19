@@ -47,8 +47,9 @@ test('recent image versions survive cached README pages while expired generated 
     [old]: '2026-10-10', [recent]: '2026-10-18', [current]: '2026-10-01',
   }, '2026-10-19');
   assert.deepEqual(plan.remove, [old]);
-  assert.deepEqual(plan.history, { [recent]: '2026-10-18', [current]: '2026-10-01' });
-  assert.deepEqual(retainAssetHistory([recent], [recent], {}, '2026-10-19').history, { [recent]: '2026-10-19' });
+  assert.deepEqual(plan.history, { [recent]: '2026-10-18' });
+  assert.deepEqual(retainAssetHistory([recent], [recent], {}, '2026-10-19').history, {});
+  assert.deepEqual(retainAssetHistory([recent], [], {}, '2026-10-19').history, { [recent]: '2026-10-19' });
 });
 
 test('real community renderers work offline and publish no private identities or external resources', async t => {
