@@ -18,12 +18,12 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/components/stats-dark.svg">
-    <img src="./assets/components/stats-light.svg" width="340" alt="GitHub snapshot: repository totals, past-year contributions and commits, followers, and languages. Repository totals include anonymous private-work aggregates; calendar coverage is recorded in the snapshot.">
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/components/stats-dark.af3b354022b8.svg">
+    <img src="./assets/components/stats-light.c2caf0993605.svg" width="340" alt="GitHub snapshot: repository totals, past-year contributions and commits, followers, and languages. Repository totals include anonymous private-work aggregates; calendar coverage is recorded in the snapshot.">
   </picture>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/components/languages-dark.svg">
-    <img src="./assets/components/languages-light.svg" width="340" alt="Language donut including public and private work. Primary languages by repository count; not code volume or proficiency.">
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/components/languages-dark.22f2fd75b131.svg">
+    <img src="./assets/components/languages-light.0b7313a1f8c0.svg" width="340" alt="Language donut including public and private work. Primary languages by repository count; not code volume or proficiency.">
   </picture>
 </p>
 
@@ -32,10 +32,10 @@
 <h3 align="center">A year in play</h3>
 
 <picture>
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="./assets/components/breakout-still-dark.svg">
-  <source media="(prefers-reduced-motion: reduce)" srcset="./assets/components/breakout-still-light.svg">
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/components/breakout-dark.svg">
-  <img src="./assets/components/breakout-light.svg" width="1200" alt="My past year of GitHub activity as a Breakout animation. Each brick represents a day; calendar coverage is recorded in the snapshot.">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="./assets/components/breakout-still-dark.30dc2df6559a.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="./assets/components/breakout-still-light.70d1a5a92203.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/components/breakout-dark.d814ebfa3d35.svg">
+  <img src="./assets/components/breakout-light.103c5d2e7821.svg" width="1200" alt="My past year of GitHub activity as a Breakout animation. Each brick represents a day; calendar coverage is recorded in the snapshot.">
 </picture>
 
 <p align="center"><sub>Daily contributions, with a little arcade energy. <a href="./assets/github-stats.json">Snapshot &amp; scope ↗</a></sub></p>

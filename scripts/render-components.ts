@@ -1,4 +1,5 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import { JSDOM } from 'jsdom';
 import { createStatsCard } from '../vendor/summary/src/templates/stats-card.ts';
@@ -109,11 +110,41 @@ export async function renderComponents(data: Snapshot) {
   return files;
 }
 
-export async function saveComponents({ data, output = new URL('components/', assets) }: { data: Snapshot; output?: URL }) {
+// GitHub can cache raw/main image URLs after the underlying SVG changes. Give
+// each rendered value its own URL and update both picture sources together.
+export function versionComponents(files: Record<string, string>, readme: string) {
+  const names = new Map<string, string>();
+  const versioned: Record<string, string> = {};
+  for (const [name, content] of Object.entries(files)) {
+    const hash = createHash('sha256').update(content).digest('hex').slice(0, 12);
+    const version = `${name.slice(0, -4)}.${hash}.svg`;
+    names.set(name, version);
+    versioned[version] = content;
+  }
+  let references = 0;
+  const updated = readme.replace(/((?:src|srcset)="\.\/assets\/components\/)([a-z-]+)(?:\.[a-f0-9]{12})?\.svg"/g,
+    (_match, prefix, base) => {
+      const name = names.get(`${base}.svg`);
+      if (!name) throw new Error(`README references an unknown component: ${base}.`);
+      references++;
+      return `${prefix}${name}"`;
+    });
+  if (!references) throw new Error('No component image references found in README.');
+  return { files: versioned, readme: updated };
+}
+
+export async function saveComponents({ data, output = new URL('components/', assets), readmeFile = new URL('../README.md', import.meta.url) }: { data: Snapshot; output?: URL; readmeFile?: URL }) {
   const files = await renderComponents(data);
+  const versioned = versionComponents(files, await readFile(readmeFile, 'utf8'));
   // Finish every renderer before replacing saved assets.
   await mkdir(output, { recursive: true });
-  for (const [name, content] of Object.entries(files)) await writeFile(new URL(name, output), content);
+  for (const [name, content] of Object.entries(versioned.files)) await writeFile(new URL(name, output), content);
+  await writeFile(readmeFile, versioned.readme);
+  // Remove only our known generated SVG names, keeping the output folder small.
+  for (const name of await readdir(output)) {
+    if (/^(?:stats|languages|breakout|breakout-still)-(?:dark|light)(?:\.[a-f0-9]{12})?\.svg$/.test(name)
+      && !(name in versioned.files)) await rm(new URL(name, output));
+  }
   console.log(`Rendered ${Object.keys(files).length} community component assets from the ${data.updated} snapshot.`);
 }
 

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { JSDOM } from 'jsdom';
-import { calendarWeeks, renderComponents } from './render-components.ts';
+import { calendarWeeks, renderComponents, versionComponents } from './render-components.ts';
 
 const snapshot = {
   updated: '2026-10-19', coverage: 'public-and-private', repositories: 51, followers: 15,
@@ -22,6 +22,21 @@ test('calendar aligns partial weeks by UTC weekday and discards unrelated fields
   assert.deepEqual(weeks[1][0], { level: 3, contributionCount: 3 });
   assert.deepEqual(weeks[1][1], { level: 0, contributionCount: 0 });
   assert.throws(() => calendarWeeks([]), /verified contribution calendar/);
+});
+
+test('image content changes produce fresh README URLs for both themes without rerender churn', () => {
+  const readme = '<picture><source srcset="./assets/components/stats-dark.svg"><img src="./assets/components/stats-light.svg"></picture>';
+  const initial = { 'stats-dark.svg': '<svg>63</svg>', 'stats-light.svg': '<svg>63 light</svg>' };
+  const first = versionComponents(initial, readme);
+  assert.deepEqual(versionComponents(initial, first.readme), first);
+  const updated = versionComponents({ ...initial, 'stats-dark.svg': '<svg>311</svg>', 'stats-light.svg': '<svg>311 light</svg>' }, first.readme);
+  assert.notEqual(updated.readme, first.readme);
+  for (const name of Object.keys(first.files)) assert.ok(!updated.readme.includes(name));
+  const references = [...updated.readme.matchAll(/\.\/assets\/components\/([^"]+)/g)].map(match => match[1]);
+  assert.equal(references.length, 2);
+  assert.ok(references.every(name => name in updated.files));
+  assert.deepEqual(versionComponents({ ...initial, 'stats-dark.svg': '<svg>311</svg>', 'stats-light.svg': '<svg>311 light</svg>' }, updated.readme), updated);
+  assert.throws(() => versionComponents(initial, '<img src="./assets/components/unknown.svg">'), /unknown component/);
 });
 
 test('real community renderers work offline and publish no private identities or external resources', async t => {
