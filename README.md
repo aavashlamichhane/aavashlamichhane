@@ -13,7 +13,8 @@
 
 <p align="center">
   I build web products, backend systems, and the occasional AI experiment.<br>
-  Based in Kathmandu. Open to interesting work and collaborations.
+  Based in Kathmandu. Open to interesting work and collaborations.<br>
+  <sub>On GitHub since 19 October 2022.</sub>
 </p>
 
 <p align="center">
