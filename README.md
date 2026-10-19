@@ -29,6 +29,15 @@
 
 <p align="center"><sub>Private repository totals included · Activity covers the past year · Languages by repository count</sub></p>
 
+<h3 align="center">A year in perspective</h3>
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/components/isocalendar-dark.5a258fa9eb30.svg">
+    <img src="./assets/components/isocalendar-light.f1d0d8000b01.svg" width="600" alt="Full-year 3D contribution calendar including anonymous private activity, with active days, daily average, and busiest-day count.">
+  </picture>
+</p>
+
 <h3 align="center">A year in play</h3>
 
 <picture>
@@ -40,5 +49,5 @@
 
 <p align="center"><sub>Daily contributions, with a little arcade energy. <a href="./assets/github-stats.json">Snapshot &amp; scope ↗</a></sub></p>
 
-<!-- Community components: vn7n24fzkq/github-profile-summary-cards and cyprieng/github-breakout.
+<!-- Community components: vn7n24fzkq/github-profile-summary-cards, lowlighter/metrics, and cyprieng/github-breakout.
      Research: .github/COMPONENTS.md · Maintenance: .github/PROFILE.md -->

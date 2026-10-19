@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { JSDOM } from 'jsdom';
 import { calendarWeeks, renderComponents, versionComponents, retainAssetHistory } from './render-components.ts';
+import { renderIsocalendar } from '../vendor/metrics/isocalendar.mjs';
 
 const snapshot = {
   updated: '2026-10-19', coverage: 'public-and-private', repositories: 51, followers: 15,
@@ -57,7 +58,7 @@ test('real community renderers work offline and publish no private identities or
   globalThis.fetch = async () => { throw new Error('Renderers must not call a remote service.'); };
   t.after(() => { globalThis.fetch = originalFetch; });
   const files = await renderComponents(snapshot);
-  assert.equal(Object.keys(files).length, 8);
+  assert.equal(Object.keys(files).length, 10);
   for (const [name, source] of Object.entries(files)) {
     assert.doesNotMatch(source, /hidden-repository|hidden-organization|hidden-credential/);
     assert.doesNotMatch(source, /NaN|Infinity/);
@@ -72,6 +73,9 @@ test('real community renderers work offline and publish no private identities or
       assert.ok(Number(doc.querySelector('circle')?.getAttribute('cx')) > 0);
     } else if (name.includes('breakout')) {
       assert.ok(doc.querySelectorAll('animate').length > 3);
+    } else if (name.includes('isocalendar')) {
+      assert.equal(doc.querySelectorAll('animate, animateTransform, animateMotion').length, 0);
+      assert.equal(doc.querySelectorAll('path').length, snapshot.calendar.length * 3);
     } else {
       assert.match(source, /prefers-reduced-motion/);
     }
@@ -80,4 +84,25 @@ test('real community renderers work offline and publish no private identities or
   assert.match(files['languages-dark.svg'], /Other/);
   assert.match(files['stats-dark.svg'], /51 repositories, 5 contributions and 4 commits/);
   assert.deepEqual(await renderComponents(snapshot), files, 'Cached data must render deterministically.');
+  assert.match(files['isocalendar-dark.svg'], /2 active days; 1.67 contributions per day; highest daily count 3/);
+  await assert.rejects(renderComponents({ ...snapshot, contributions: { ...snapshot.contributions, total: 6 } }), /Calendar total/);
+});
+
+test('isometric renderer preserves a full leap-year calendar and partial-week positions without inventing activity', () => {
+  const start = Date.parse('2023-10-19T00:00:00Z');
+  const days = Array.from({ length: 366 }, (_, index) => ({
+    date: new Date(start + index * 86_400_000).toISOString().slice(0, 10),
+    count: index % 17, level: (index % 5) as 0 | 1 | 2 | 3 | 4,
+  }));
+  const weeks = calendarWeeks(days);
+  const source = renderIsocalendar(weeks.map(week => week.map(day => day && ({ ...day, color: '#7bf0be' }))));
+  const dom = new JSDOM(source, { contentType: 'image/svg+xml' });
+  const doc = dom.window.document;
+  assert.equal(doc.querySelectorAll('path').length, 366 * 3, 'Exactly one three-face column per actual calendar day.');
+  assert.equal(doc.querySelector('g > g > g')?.getAttribute('transform'), 'translate(-6.8, 10)', 'The first Thursday retains its weekday position.');
+  assert.doesNotMatch(source, /NaN|Infinity/);
+  dom.window.close();
+  const empty = renderIsocalendar([[null, { contributionCount: 0, color: '#16262d' }]]);
+  assert.doesNotMatch(empty, /NaN|Infinity/);
+  assert.match(empty, /M0,1 1.7,2 1.7,2 0,1 z/);
 });

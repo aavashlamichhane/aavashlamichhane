@@ -8,7 +8,8 @@ import { applyAnimation } from '../vendor/summary/src/utils/animation.ts';
 import { Icon } from '../vendor/summary/src/const/icon.ts';
 import { Theme } from '../vendor/summary/src/const/theme.ts';
 import { generateSVG, type ColorPalette } from '../vendor/breakout/src/svg.ts';
-import { assets, themes } from './build-assets.mjs';
+import { renderIsocalendar } from '../vendor/metrics/isocalendar.mjs';
+import { assets, themes, svg, xml } from './build-assets.mjs';
 
 type Day = { date: string; count: number; level: 0 | 1 | 2 | 3 | 4 };
 type Snapshot = {
@@ -68,6 +69,8 @@ export async function renderComponents(data: Snapshot) {
     throw new Error('Refresh the verified contribution snapshot before rendering.');
   }
   const weeks = calendarWeeks(data.calendar);
+  const calendarTotal = data.calendar.reduce((sum, day) => sum + day.count, 0);
+  if (calendarTotal !== data.contributions.total) throw new Error('Calendar total does not match the verified snapshot.');
   const files: Record<string, string> = {};
   const entries = Object.entries(data.languages).sort(([a, n], [b, m]) => m - n || a.localeCompare(b));
   const shown = entries.slice(0, 4);
@@ -100,6 +103,25 @@ export async function renderComponents(data: Snapshot) {
     const palette: ColorPalette = name === 'dark'
       ? ['#16262d', '#164c3a', '#27835a', '#44b980', '#7bf0be']
       : ['#e3ebe6', '#b2dec1', '#72be94', '#3e976c', '#126b4d'];
+    const calendar = renderIsocalendar(weeks.map(week => week.map(day => day && ({
+      contributionCount: day.contributionCount, color: palette[day.level],
+    }))));
+    const activeDays = data.calendar.filter(day => day.count > 0).length;
+    const highest = Math.max(...data.calendar.map(day => day.count));
+    const average = (calendarTotal / data.calendar.length).toFixed(2);
+    const range = `${data.calendar[0].date} — ${data.calendar.at(-1)!.date}`;
+    const calendarDescription = `Full-year isometric contribution calendar, ${range}. ${activityScope}. ${calendarTotal} contributions over ${data.calendar.length} days; ${activeDays} active days; ${average} contributions per day; highest daily count ${highest}. Snapshot ${data.updated}.`;
+    // Only the frame and aggregate captions are local; the 3D drawing is Metrics.
+    files[`isocalendar-${name}.svg`] = svg(480, 330, calendarDescription, `
+      <rect x="0.5" y="0.5" width="479" height="329" rx="8" fill="${t.bg}" stroke="${t.line}"/>
+      <g font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif">
+        <text x="24" y="27" fill="${t.mint}" font-size="13" font-weight="600">${calendarTotal.toLocaleString('en-US')} contributions</text>
+        <text x="456" y="27" text-anchor="end" fill="${t.muted}" font-size="10">${xml(range)}</text>
+        <svg x="0" y="40" width="480" height="240" viewBox="0 0 480 270">${calendar.replace(/^<svg[^>]*>|<\/svg>$/g, '')}</svg>
+        ${[[80, activeDays, 'ACTIVE DAYS'], [240, average, 'DAILY AVERAGE'], [400, highest, 'BUSIEST DAY']].map(([x, value, label]) => `
+          <text x="${x}" y="299" text-anchor="middle" fill="${t.text}" font-size="17" font-weight="600">${value}</text>
+          <text x="${x}" y="315" text-anchor="middle" fill="${t.muted}" font-size="8" letter-spacing="0.8">${label}</text>`).join('')}
+      </g>`);
     const breakout = await generateSVG({ days: weeks, defaultColorPalette: palette }, {
       enableGhostBricks: true, bricksColors: palette, paddleColor: t.violet, ballColor: t.mint,
     });
@@ -136,7 +158,7 @@ export function versionComponents(files: Record<string, string>, readme: string)
 export function retainAssetHistory(existing: string[], current: string[], previous: Record<string, string>, today: string) {
   const history: Record<string, string> = {};
   const remove: string[] = [];
-  const generated = /^(?:stats|languages|breakout|breakout-still)-(?:dark|light)(?:\.[a-f0-9]{12})?\.svg$/;
+  const generated = /^(?:stats|languages|isocalendar|breakout|breakout-still)-(?:dark|light)(?:\.[a-f0-9]{12})?\.svg$/;
   for (const name of new Set([...existing, ...current])) {
     if (!generated.test(name)) continue;
     if (current.includes(name)) continue;

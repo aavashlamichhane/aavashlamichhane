@@ -1,6 +1,6 @@
 # Maintaining this profile
 
-The README keeps the banner, three contact links, a short introduction, two summary cards, and an animated Breakout contribution board. Community renderers supply the widgets; repository-local SVGs display without third-party image services, API keys in URLs, or JavaScript embeds. See [the research shortlist](COMPONENTS.md) and [source attribution](../vendor/README.md).
+The README keeps the banner, three contact links, a short introduction, two summary cards, a full-year isometric contribution calendar, and an animated Breakout contribution board. Community renderers supply the widgets; repository-local SVGs display without third-party image services, API keys in URLs, or JavaScript embeds. See [the research shortlist](COMPONENTS.md) and [source attribution](../vendor/README.md).
 
 ## Refresh locally
 
@@ -15,7 +15,7 @@ npm run refresh:private
 
 The last command reads the CLI credential into memory, queries GitHub, then renders the components. For a classic PAT or OAuth credential, grant both `repo` and `read:user`: repository access alone does not include private activity in GraphQL's contribution collection. To add the calendar permission to an existing local CLI login, run `gh auth refresh -h github.com -s read:user` and complete GitHub's authorization. Alternatively, provide `PROFILE_STATS_TOKEN` through the environment and use `npm run refresh`. `npm run render` only uses the saved aggregate JSON and makes no network requests. Tokens never go to the component renderers or a third-party badge service.
 
-Edit `README.md` for the intro and links. `scripts/build-assets.mjs` builds the existing banner and contact chips. `scripts/render-components.ts` adapts the sanitized snapshot to the pinned community templates and sets the palette. All graphics use system fonts and support light and dark appearances. Summary card animations respect reduced motion; the Breakout picture selects a static first-frame version for that preference. The cards wrap vertically on narrow screens.
+Edit `README.md` for the intro and links. `scripts/build-assets.mjs` builds the existing banner and contact chips. `scripts/render-components.ts` adapts the sanitized snapshot to the pinned community templates and sets the palette. All graphics use system fonts and support light and dark appearances. Summary card animations respect reduced motion; the Breakout picture selects a static first-frame version for that preference. The isometric calendar is static and scales to narrow screens. The summary cards wrap vertically on narrow screens.
 
 ## Anonymous private-work data
 
@@ -24,6 +24,8 @@ Edit `README.md` for the intro and links. `scripts/build-assets.mjs` builds the 
 Repository and language counts cover owned repositories plus repositories GitHub reports as recently contributed to through commits or pull requests, accessible to the credential. Forks are excluded; duplicates count once. Repositories without a primary language enter the repository total but not the donut. The donut shows the four most common primary languages and groups the remainder as Other. These are repository counts, not bytes of code or proficiency. Team coverage is GitHub's recent-contribution scope, not a lifetime work history.
 
 The contribution calendar and commit count cover the exact range recorded in the snapshot. Private activity is included where GitHub and the credential permit it. These measures are not an estimate of all professional work. The two cards have distinct scopes: repository/language totals describe the accessible repository set; activity describes the past year. Detailed accessible image titles contain the values, date, and scope.
+
+The Metrics isometric calendar and Breakout read the same sanitized daily counts. Column heights scale to the busiest day; colors use GitHub's daily intensity levels. Only dates present in the snapshot are drawn, preserving their Sunday-first weekday positions. The calendar's total must match the verified contribution total before rendering succeeds. Its active-day count counts days above zero, its average includes zero-activity days, and its busiest-day value is a contribution count. It needs no new token or secret. The selected calendar omits streak counters.
 
 ## Automatic updates
 
