@@ -1,0 +1,18 @@
+{
+  "name": "aavash-github-profile",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "test": "node --test scripts/update-stats.test.mjs && node --import tsx --test scripts/render-components.test.ts",
+    "artwork": "node scripts/build-assets.mjs",
+    "render": "node --import tsx scripts/render-components.ts",
+    "refresh": "node scripts/update-stats.mjs && npm run render",
+    "refresh:private": "node scripts/update-stats.mjs --private && npm run render"
+  },
+  "dependencies": {
+    "d3": "7.9.0",
+    "jsdom": "26.0.0",
+    "tsx": "4.23.15"
+  }
+}

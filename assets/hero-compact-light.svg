@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-labelledby="title"><title id="title">Aavash Lamichhane — Full-Stack Developer &amp; Backend Engineer</title>
+    <defs><pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#bed3c7" stroke-width="0.6"/></pattern></defs>
+    <rect x="1" y="1" width="638" height="358" rx="24" fill="#f1f7f3" stroke="#bed3c7"/>
+
+    <g font-family="Segoe UI,Arial,sans-serif">
+      <rect x="36" y="39" width="6" height="17" rx="3" fill="#126b4d"/>
+      <text x="56" y="53" fill="#4d6a60" font-size="16" letter-spacing="2.5">AAVASH.DEV / ENGINEERING</text>
+      <text x="33" y="131" fill="#183a32" font-size="68" font-weight="750" letter-spacing="-2">Aavash</text>
+      <text x="33" y="206" fill="#183a32" font-size="68" font-weight="750" letter-spacing="-2">Lamichhane<tspan fill="#126b4d">.</tspan></text>
+      <text x="36" y="258" fill="#126b4d" font-size="24" font-weight="600">Full-Stack Developer</text>
+      <text x="36" y="291" fill="#4d6a60" font-size="24">&amp; Backend Engineer</text>
+      <path d="M36 329h28" stroke="#126b4d" stroke-width="2"/>
+      <text x="78" y="335" fill="#4d6a60" font-size="16" letter-spacing="1.5">KATHMANDU, NEPAL</text>
+    </g>
+
+  </svg>

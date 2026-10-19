@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-labelledby="title"><title id="title">Aavash Lamichhane — Full-Stack Developer &amp; Backend Engineer</title>
+    <defs><pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#bed3c7" stroke-width="0.6"/></pattern></defs>
+    <rect x="1" y="1" width="1198" height="318" rx="24" fill="#f1f7f3" stroke="#bed3c7"/>
+    <path d="M800 1h375a24 24 0 0 1 24 24v270a24 24 0 0 1-24 24H800Z" fill="url(#grid)" opacity="0.6"/>
+    <g font-family="Segoe UI,Arial,sans-serif">
+      <rect x="56" y="39" width="6" height="17" rx="3" fill="#126b4d"/>
+      <text x="76" y="53" fill="#4d6a60" font-size="14" letter-spacing="2.5">AAVASH.DEV / ENGINEERING</text>
+      <text x="53" y="143" fill="#183a32" font-size="68" font-weight="750" letter-spacing="-2.5">Aavash Lamichhane<tspan fill="#126b4d">.</tspan></text>
+      <text x="56" y="192" fill="#126b4d" font-size="25" font-weight="600">Full-Stack Developer &amp; Backend Engineer</text>
+
+      <path d="M56 255h28" stroke="#126b4d" stroke-width="2"/>
+      <text x="98" y="260" fill="#4d6a60" font-size="15" letter-spacing="1.5">KATHMANDU, NEPAL</text>
+    </g>
+    <g transform="translate(840 36) scale(0.78)" fill="none" stroke="#bed3c7" stroke-width="1.5">
+    <circle cx="170" cy="154" r="133" stroke-dasharray="3 9"/>
+    <ellipse cx="170" cy="154" rx="145" ry="76" transform="rotate(-35 170 154)"/>
+    <path d="M55 65 170 154 295 224M170 154 284 54M170 154 60 258"/>
+    <circle cx="170" cy="154" r="58" fill="#e3efe8" stroke="#126b4d"/>
+    <circle cx="170" cy="154" r="46" stroke-dasharray="2 7"/>
+    <text x="170" y="165" fill="#126b4d" stroke="none" text-anchor="middle" font-family="Consolas,monospace" font-size="32" font-weight="700">A/L</text>
+    <rect x="21" y="31" width="70" height="62" rx="15" fill="#e3efe8"/>
+    <path d="m45 52-9 10 9 10m22-20 9 10-9 10m-9-23-6 26" stroke="#126b4d" stroke-linecap="round"/>
+    <rect x="251" y="21" width="70" height="62" rx="15" fill="#e3efe8"/>
+    <ellipse cx="286" cy="43" rx="17" ry="7" stroke="#7651b3"/>
+    <path d="M269 43v20c0 9 34 9 34 0V43m-34 10c0 9 34 9 34 0" stroke="#7651b3"/>
+    <rect x="260" y="199" width="70" height="62" rx="15" fill="#e3efe8"/>
+    <path d="m276 237 12-18 13 16 13-20" stroke="#126b4d" stroke-linecap="round"/>
+    <circle cx="60" cy="258" r="15" fill="#e3efe8" stroke="#7651b3"/>
+    <circle cx="60" cy="258" r="4" fill="#7651b3" stroke="none"/>
+    <circle cx="234" cy="102" r="4" fill="#126b4d" stroke="none"/>
+  </g>
+  </svg>
