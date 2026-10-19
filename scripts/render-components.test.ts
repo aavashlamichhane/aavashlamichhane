@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { JSDOM } from 'jsdom';
-import { calendarWeeks, renderComponents, versionComponents } from './render-components.ts';
+import { calendarWeeks, renderComponents, versionComponents, retainAssetHistory } from './render-components.ts';
 
 const snapshot = {
   updated: '2026-10-19', coverage: 'public-and-private', repositories: 51, followers: 15,
@@ -37,6 +37,18 @@ test('image content changes produce fresh README URLs for both themes without re
   assert.ok(references.every(name => name in updated.files));
   assert.deepEqual(versionComponents({ ...initial, 'stats-dark.svg': '<svg>311</svg>', 'stats-light.svg': '<svg>311 light</svg>' }, updated.readme), updated);
   assert.throws(() => versionComponents(initial, '<img src="./assets/components/unknown.svg">'), /unknown component/);
+});
+
+test('recent image versions survive cached README pages while expired generated images are pruned', () => {
+  const old = 'stats-dark.111111111111.svg';
+  const recent = 'stats-dark.222222222222.svg';
+  const current = 'stats-dark.333333333333.svg';
+  const plan = retainAssetHistory([old, recent, current, 'unrelated.svg'], [current], {
+    [old]: '2026-10-10', [recent]: '2026-10-18', [current]: '2026-10-01',
+  }, '2026-10-19');
+  assert.deepEqual(plan.remove, [old]);
+  assert.deepEqual(plan.history, { [recent]: '2026-10-18', [current]: '2026-10-01' });
+  assert.deepEqual(retainAssetHistory([recent], [recent], {}, '2026-10-19').history, { [recent]: '2026-10-19' });
 });
 
 test('real community renderers work offline and publish no private identities or external resources', async t => {

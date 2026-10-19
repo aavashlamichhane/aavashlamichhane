@@ -133,18 +133,37 @@ export function versionComponents(files: Record<string, string>, readme: string)
   return { files: versioned, readme: updated };
 }
 
+export function retainAssetHistory(existing: string[], current: string[], previous: Record<string, string>, today: string) {
+  const history: Record<string, string> = {};
+  const remove: string[] = [];
+  const generated = /^(?:stats|languages|breakout|breakout-still)-(?:dark|light)(?:\.[a-f0-9]{12})?\.svg$/;
+  for (const name of new Set([...existing, ...current])) {
+    if (!generated.test(name)) continue;
+    const firstSeen = previous[name] ?? today;
+    const age = Date.parse(today) - Date.parse(firstSeen);
+    if (!current.includes(name) && age > 7 * 86_400_000) remove.push(name);
+    else history[name] = firstSeen;
+  }
+  return { history: Object.fromEntries(Object.entries(history).sort()), remove };
+}
+
 export async function saveComponents({ data, output = new URL('components/', assets), readmeFile = new URL('../README.md', import.meta.url) }: { data: Snapshot; output?: URL; readmeFile?: URL }) {
   const files = await renderComponents(data);
   const versioned = versionComponents(files, await readFile(readmeFile, 'utf8'));
   // Finish every renderer before replacing saved assets.
   await mkdir(output, { recursive: true });
+  let previous: Record<string, string> = {};
+  try {
+    previous = JSON.parse(await readFile(new URL('versions.json', output), 'utf8'));
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error;
+  }
+  const retained = retainAssetHistory(await readdir(output), Object.keys(versioned.files), previous, new Date().toISOString().slice(0, 10));
   for (const [name, content] of Object.entries(versioned.files)) await writeFile(new URL(name, output), content);
   await writeFile(readmeFile, versioned.readme);
-  // Remove only our known generated SVG names, keeping the output folder small.
-  for (const name of await readdir(output)) {
-    if (/^(?:stats|languages|breakout|breakout-still)-(?:dark|light)(?:\.[a-f0-9]{12})?\.svg$/.test(name)
-      && !(name in versioned.files)) await rm(new URL(name, output));
-  }
+  // Keep a week of prior versions: cached README HTML may still reference them.
+  for (const name of retained.remove) await rm(new URL(name, output));
+  await writeFile(new URL('versions.json', output), JSON.stringify(retained.history, null, 2) + '\n');
   console.log(`Rendered ${Object.keys(files).length} community component assets from the ${data.updated} snapshot.`);
 }
 
