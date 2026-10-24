@@ -19,12 +19,12 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/components/stats-dark.5c959930cdb8.svg">
-    <img src="./assets/components/stats-light.5a88692464d0.svg" width="340" alt="GitHub snapshot: repository totals, past-year contributions and commits, followers, and languages. Repository totals include anonymous private-work aggregates; calendar coverage is recorded in the snapshot.">
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/components/stats-dark.2441d5ab9e71.svg">
+    <img src="./assets/components/stats-light.e73016c57526.svg" width="340" alt="GitHub snapshot: repository totals, past-year contributions and commits, followers, and languages. Repository totals include anonymous private-work aggregates; calendar coverage is recorded in the snapshot.">
   </picture>
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/components/languages-dark.9b37bb2ec291.svg">
-    <img src="./assets/components/languages-light.0ba172a737ca.svg" width="340" alt="Language donut including public and private work. Primary languages by repository count; not code volume or proficiency.">
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/components/languages-dark.08ac7b3f6292.svg">
+    <img src="./assets/components/languages-light.8a2e47b4f6fe.svg" width="340" alt="Language donut including public and private work. Primary languages by repository count; not code volume or proficiency.">
   </picture>
 </p>
 
@@ -34,18 +34,18 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/components/isocalendar-dark.8062405c5c53.svg">
-    <img src="./assets/components/isocalendar-light.ded147511fbc.svg" width="600" alt="Full-year 3D contribution calendar including anonymous private activity, with active days, daily average, and busiest-day count.">
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/components/isocalendar-dark.001f18cb4fb2.svg">
+    <img src="./assets/components/isocalendar-light.7b31b7d8b359.svg" width="600" alt="Full-year 3D contribution calendar including anonymous private activity, with active days, daily average, and busiest-day count.">
   </picture>
 </p>
 
 <h3 align="center">A year in play</h3>
 
 <picture>
-  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="./assets/components/breakout-still-dark.83130382ce9a.svg">
-  <source media="(prefers-reduced-motion: reduce)" srcset="./assets/components/breakout-still-light.4bbc2b667949.svg">
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/components/breakout-dark.0c3c686ca2ca.svg">
-  <img src="./assets/components/breakout-light.bd0571a7da3f.svg" width="1200" alt="My past year of GitHub activity as a Breakout animation. Each brick represents a day; calendar coverage is recorded in the snapshot.">
+  <source media="(prefers-reduced-motion: reduce) and (prefers-color-scheme: dark)" srcset="./assets/components/breakout-still-dark.ae0d0205ff76.svg">
+  <source media="(prefers-reduced-motion: reduce)" srcset="./assets/components/breakout-still-light.019cc4c6170c.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/components/breakout-dark.61608b24be2c.svg">
+  <img src="./assets/components/breakout-light.13a1b97041a3.svg" width="1200" alt="My past year of GitHub activity as a Breakout animation. Each brick represents a day; calendar coverage is recorded in the snapshot.">
 </picture>
 
 <p align="center"><sub>Daily contributions, with a little arcade energy. <a href="./assets/github-stats.json">Snapshot &amp; scope ↗</a></sub></p>
