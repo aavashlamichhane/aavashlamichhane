@@ -1,6 +1,6 @@
 {
   "username": "aavashlamichhane",
-  "updated": "2026-10-31",
+  "updated": "2026-11-02",
   "coverage": "public-and-private",
   "repositoryBasis": "Owned and recently contributed-to non-fork repositories accessible to the credential; team contributions include commits and pull requests.",
   "followers": 15,
@@ -9,10 +9,10 @@
   "privateRepositories": 32,
   "contributions": {
     "coverage": "public-and-private",
-    "total": 2224,
-    "commits": 293,
-    "from": "2025-10-25",
-    "to": "2026-10-31"
+    "total": 2209,
+    "commits": 278,
+    "from": "2025-11-01",
+    "to": "2026-11-02"
   },
   "languages": {
     "TypeScript": 14,
@@ -24,41 +24,6 @@
     "CSS": 1
   },
   "calendar": [
-    {
-      "date": "2025-10-26",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-10-27",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-10-28",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-10-29",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-10-30",
-      "count": 0,
-      "level": 0
-    },
-    {
-      "date": "2025-10-31",
-      "count": 7,
-      "level": 1
-    },
-    {
-      "date": "2025-11-01",
-      "count": 8,
-      "level": 1
-    },
     {
       "date": "2025-11-02",
       "count": 0,
@@ -1876,6 +1841,16 @@
     },
     {
       "date": "2026-10-31",
+      "count": 0,
+      "level": 0
+    },
+    {
+      "date": "2026-11-01",
+      "count": 0,
+      "level": 0
+    },
+    {
+      "date": "2026-11-02",
       "count": 0,
       "level": 0
     }
