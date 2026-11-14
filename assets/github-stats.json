@@ -1,21 +1,21 @@
 {
   "username": "aavashlamichhane",
-  "updated": "2026-11-13",
+  "updated": "2026-11-14",
   "coverage": "public-and-private",
   "repositoryBasis": "Owned and recently contributed-to non-fork repositories accessible to the credential; team contributions include commits and pull requests.",
   "followers": 15,
   "languageBasis": "Repository count per primary language across the same public and private scope; not lines of code or proficiency.",
-  "repositories": 52,
-  "privateRepositories": 33,
+  "repositories": 51,
+  "privateRepositories": 32,
   "contributions": {
     "coverage": "public-and-private",
     "total": 2212,
     "commits": 284,
     "from": "2025-11-08",
-    "to": "2026-11-13"
+    "to": "2026-11-14"
   },
   "languages": {
-    "TypeScript": 15,
+    "TypeScript": 14,
     "Python": 11,
     "JavaScript": 7,
     "C++": 6,
@@ -1870,6 +1870,11 @@
     },
     {
       "date": "2026-11-13",
+      "count": 0,
+      "level": 0
+    },
+    {
+      "date": "2026-11-14",
       "count": 0,
       "level": 0
     }
